@@ -11,7 +11,8 @@ export default class SessionController {
     public async create(req: Request<{}, {}, IAuthenticated, {}>, resp: Response):Promise<Response> {
         const {password, email} = req.body;
         const data = container.resolve(AuthenticateUserService);
-        const autheticated = await data.execute({email, password});
-        return resp.send(autheticated);
+        const authenticated = await data.execute({email, password});
+        const user = {user: {...authenticated.user, password: undefined}, token: authenticated.token}
+        return resp.send(user);
     }
 }
