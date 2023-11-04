@@ -9,5 +9,6 @@ const imageController = new ImagesController();
 const upload = multer(multerConfig);
 
 uploadRoutes.post("/images", upload.single("image") ,imageController.createImage)
+uploadRoutes.get("/images",imageController.index)
 
 export default uploadRoutes;

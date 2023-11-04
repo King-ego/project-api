@@ -17,7 +17,7 @@ class S3Storage implements IS3Storage{
     ) {
         this.client = new aws.S3({
             region: process.env.AWS_DEFAUL_REGION,
-            apiVersion: "2023-10-31"
+            apiVersion: "2012-10-17"
         })
     }
 
@@ -32,7 +32,8 @@ class S3Storage implements IS3Storage{
         const fileContent = await fs.promises.readFile(originalPath);
         console.log(filename, fileContent)
 
-        await this.client.upload({
+        await this.client.putObject({
+            ACL: "public-read",
             Bucket: process.env.AWS_BUCKET,
             Key: filename,
             Body: fileContent,

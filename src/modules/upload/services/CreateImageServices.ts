@@ -2,6 +2,7 @@ import {injectable, inject} from "tsyringe";
 import IImageRepository from "../repositories/IImageRepository";
 import IS3Storage from "../../../ultils/IS3Storage";
 import AppError from "../../../shared/erros/AppError";
+import Images from "../infra/typeorm/entities/Images";
 /*import Images from "../infra/typeorm/entities/Images";
 import AppError from "../../../shared/erros/AppError";*/
 
@@ -15,10 +16,11 @@ class CreateImageService {
     ) {
     }
 
-    public async execute(file?: Express.Multer.File):Promise<string> {
-        if(!file) throw new AppError("File not send")
+    public async execute(file?: Express.Multer.File):Promise<Images> {
+        if(!file) throw new AppError("File not send");
         await this.s3Storage.saveFile(file.filename)
-        return "ok";
+        const image = await this.imagesRepository.createImage(file.filename)
+        return image;
     }
 }
 
