@@ -20,6 +20,14 @@ class ImageRepository implements IImageRepository {
     public async list(): Promise<Images[]> {
         return await this.ormRepository.find();
     }
+    public async ImageByUrl(url: string):Promise<Images | null>{
+         const image = await this.ormRepository.findOne({
+            where: {
+                url: url
+            }
+        });
+        return image;
+    }
 }
 
 export default ImageRepository;

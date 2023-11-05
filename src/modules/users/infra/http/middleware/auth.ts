@@ -20,7 +20,7 @@ export default function auth(
     const authHeader = request.headers.authorization;
 
     if (!authHeader) {
-        throw new AppError("JWT token is missing", 401);
+        throw new AppError("JWT token is missing", 403);
     }
 
     const [, token] = authHeader.split(" ");
@@ -37,6 +37,6 @@ export default function auth(
 
         return next();
     } catch (err) {
-        throw new AppError("Invalid JWT token", 401);
+        throw new AppError("Invalid JWT token", 403);
     }
 }

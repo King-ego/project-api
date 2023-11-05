@@ -43,6 +43,16 @@ class S3Storage implements IS3Storage{
 
         return filename;
     }
+    async getFile(filename: string):Promise<S3.Types.GetObjectAclOutput>{
+        console.log(filename)
+        const awsImage = await this.client.getObject({
+            Bucket: process.env.AWS_BUCKET,
+            Key: filename,
+        }).promise();
+
+        console.log({awsImage});
+        return awsImage
+    }
 }
 
 export default S3Storage
