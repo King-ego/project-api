@@ -2,10 +2,10 @@ import aws,{S3} from "aws-sdk";
 import path from "path";
 import mime from "mime";
 
-import multerConfig from "../config/multer";
-import AppError from "../shared/erros/AppError";
+import multerConfig from "../../../../../config/multer";
+import AppError from "../../../../../shared/erros/AppError";
 import * as fs from "fs";
-import IS3Storage from "./IS3Storage";
+import IS3Storage from "../../../repositories/IS3Storage";
 import * as process from "process";
 /*import {inject, injectable} from "tsyringe";
 import IImageRepository from "../modules/upload/repositories/IImageRepository";*/
@@ -30,7 +30,6 @@ class S3Storage implements IS3Storage{
         }
 
         const fileContent = await fs.promises.readFile(originalPath);
-        console.log(filename, fileContent)
 
         await this.client.putObject({
             ACL: "public-read",
@@ -44,13 +43,11 @@ class S3Storage implements IS3Storage{
         return filename;
     }
     async getFile(filename: string):Promise<S3.Types.GetObjectAclOutput>{
-        console.log(filename)
         const awsImage = await this.client.getObject({
             Bucket: process.env.AWS_BUCKET,
             Key: filename,
         }).promise();
 
-        console.log({awsImage});
         return awsImage
     }
 }

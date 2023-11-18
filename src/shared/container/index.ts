@@ -6,8 +6,8 @@ import UsersRepository from "../../modules/users/infra/typeorm/repositories/User
 import IImageRepository from "../../modules/upload/repositories/IImageRepository";
 import ImageRepository from "../../modules/upload/infra/typeorm/repositories/ImageRepository";
 
-import IS3Storage from "../../ultils/IS3Storage";
-import S3Storage from "../../ultils/S3Storage";
+import IS3Storage from "../../modules/upload/repositories/IS3Storage";
+import S3Storage from "../../modules/upload/infra/typeorm/repositories/S3Storage";
 
 import "../../modules/users/providers"
 

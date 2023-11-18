@@ -27,10 +27,9 @@ export default class ImagesController {
 
     public async getImage(req:Request<{},{},{},{filename: string}>, resp: Response ):Promise<Response> {
         const {filename} = req.query;
-        console.log(filename)
         const data = container.resolve(ListImageAWSService);
         const image = await data.execute(filename);
-        console.log({image: (image as unknown as any).Body})
+
         return resp.send((image as unknown as any).Body)
     }
 }

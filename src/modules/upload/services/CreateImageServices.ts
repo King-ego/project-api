@@ -1,10 +1,8 @@
 import {injectable, inject} from "tsyringe";
 import IImageRepository from "../repositories/IImageRepository";
-import IS3Storage from "../../../ultils/IS3Storage";
+import IS3Storage from "../repositories/IS3Storage";
 import AppError from "../../../shared/erros/AppError";
 import Images from "../infra/typeorm/entities/Images";
-/*import Images from "../infra/typeorm/entities/Images";
-import AppError from "../../../shared/erros/AppError";*/
 
 @injectable()
 class CreateImageService {

@@ -4,6 +4,8 @@ import ListUsersService from "../../../services/ListUsersService";
 
 import {IRequestCreateUser} from "../dto/IUsers"
 import CreateUserService from "../../../services/CreateUserService";
+import IUpdateUsers from "../dto/IUpdateUsers";
+import UpdateUserService from "../../../services/UpdateUserService";
 
 export default class UserController {
     public async index(_: Request, resp: Response): Promise<Response> {
@@ -13,11 +15,24 @@ export default class UserController {
     }
 
     public async create(req: Request<{}, {}, IRequestCreateUser, {}>, resp: Response): Promise<Response> {
-        const {name, password, email} = req.body;
+        const {name, password, email, confirm_password} = req.body;
         const data = container.resolve(CreateUserService);
 
-        const user = await data.execute({name, password, email})
+        const user = await data.execute({name, password, email, confirm_password})
 
-        return resp.send(user)
+        const userWithoutPassword = {...user, password: undefined};
+
+        return resp.send(userWithoutPassword);
+    }
+
+    public async update(req: Request<{user_id: string},{},Omit<IUpdateUsers, "user_id">>, resp:Response): Promise<Response>{
+        const {body,params} = req
+        const updateUser = {...params, ...body};
+
+        const dataUpdate = container.resolve(UpdateUserService);
+
+        const userUpdate = await dataUpdate.execute(updateUser);
+
+        return resp.send({...userUpdate, password: undefined});
     }
 }
