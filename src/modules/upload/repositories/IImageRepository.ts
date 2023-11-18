@@ -3,5 +3,5 @@ import Images from "../infra/typeorm/entities/Images";
 export default interface IImageRepository {
     createImage(name: string):Promise<Images>
     list():Promise<Images[]>
-    ImageByUrl(url: string):Promise<Images | null>
+    ImageByUrl(filename: string):Promise<Images | null>
 }

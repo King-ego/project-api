@@ -12,7 +12,7 @@ class Images {
     id: string;
 
     @Column("varchar")
-    url: string;
+    filename: string;
 
     @CreateDateColumn()
     created_at: Date;

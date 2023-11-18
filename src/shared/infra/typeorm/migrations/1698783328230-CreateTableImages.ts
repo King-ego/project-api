@@ -15,7 +15,7 @@ export class CreateTableImages1698783328230 implements MigrationInterface {
                     default: "uuid_generate_v4()"
                 },
                 {
-                    name: "url",
+                    name: "filename",
                     type: "varchar",
                     isNullable: false,
                 },

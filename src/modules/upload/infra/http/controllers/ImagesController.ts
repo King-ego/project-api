@@ -10,8 +10,7 @@ export default class ImagesController {
         const {file} = req;
         const data = container.resolve(CreateImageService)
         const image = await data.execute(file);
-        const imageUrl = {...image, url: `${process.env.BUCKET_URL}${image.url}`}
-        return resp.send( imageUrl)
+        return resp.send( image)
     }
 
     public async index(_: Request, resp: Response):Promise<Response>{

@@ -14,13 +14,13 @@ class ListImageAWSService {
     ) {
     }
 
-    public async execute(fileUrl: string):Promise<S3.Types.GetObjectAclOutput> {
+    public async execute(filename: string):Promise<S3.Types.GetObjectAclOutput> {
 
-        const existImage = await this.imagesRepository.ImageByUrl(fileUrl)
+        const existImage = await this.imagesRepository.ImageByUrl(filename)
 
         if (!existImage) throw new AppError("Image Not Found")
 
-        const image = await this.s3Storage.getFile(fileUrl)
+        const image = await this.s3Storage.getFile(filename)
         return image;
     }
 }
