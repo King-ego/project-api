@@ -1,7 +1,6 @@
 import {Request, Response} from "express";
 import {container} from "tsyringe";
 import CreateImageService from "../../../services/CreateImageServices";
-import * as process from "process";
 import ListImageAWSService from "../../../services/ListImageAWSService";
 import ListImagesServices from "../../../services/ListImagesServices";
 

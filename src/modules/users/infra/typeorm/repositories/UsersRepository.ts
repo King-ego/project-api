@@ -2,8 +2,8 @@ import {ILike, Repository} from "typeorm";
 import User from "../entities/Users";
 import AppDataSource from "../../../../../shared/infra/typeorm/config"
 import IUsersRepository from "../../../repositories/IUsersRepository";
-import {IRequestCreateUser} from "../../http/dto/IUsers";
-import IUpdateUsers from "../../http/dto/IUpdateUsers";
+import {IRequestCreateUserWithoutPassword} from "../../http/dto/IUsers";
+import {IUpdateUsers} from "../../http/dto/IUpdateUsers";
 import {removeNullOrUndefinedKeys} from "../../../../../ultils/formater";
 import IFilterUsers from "../../http/dto/IFilterUsers";
 
@@ -33,7 +33,7 @@ class UsersRepository implements IUsersRepository {
         return user;
     }
 
-    public async create(user: Omit<IRequestCreateUser, "confirm_password">): Promise<User> {
+    public async create(user: IRequestCreateUserWithoutPassword): Promise<User> {
         const newUser = this.ormRepository.create(user);
 
         await this.ormRepository.save(newUser);

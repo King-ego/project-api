@@ -1,6 +1,6 @@
 import {inject, injectable} from "tsyringe";
 import IUsersRepository from "../repositories/IUsersRepository";
-import IUpdateUsers from "../infra/http/dto/IUpdateUsers";
+import {IUpdateUsers} from "../infra/http/dto/IUpdateUsers";
 import Users from "../infra/typeorm/entities/Users";
 import AppError from "../../../shared/erros/AppError";
 

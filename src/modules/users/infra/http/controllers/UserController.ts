@@ -4,7 +4,7 @@ import ListUsersService from "../../../services/ListUsersService";
 
 import {IRequestCreateUser} from "../dto/IUsers"
 import CreateUserService from "../../../services/CreateUserService";
-import IUpdateUsers from "../dto/IUpdateUsers";
+import {IUpdateParams, IUpdateBody} from "../dto/IUpdateUsers";
 import UpdateUserService from "../../../services/UpdateUserService";
 
 export default class UserController {
@@ -25,7 +25,7 @@ export default class UserController {
         return resp.send(userWithoutPassword);
     }
 
-    public async update(req: Request<{user_id: string},{},Omit<IUpdateUsers, "user_id">>, resp:Response): Promise<Response>{
+    public async update(req: Request<IUpdateParams,{},IUpdateBody>, resp:Response): Promise<Response>{
         const {body,params} = req
         const updateUser = {...params, ...body};
 
