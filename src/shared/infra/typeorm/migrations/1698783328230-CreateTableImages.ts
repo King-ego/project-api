@@ -12,11 +12,17 @@ export class CreateTableImages1698783328230 implements MigrationInterface {
                     type:"uuid",
                     generationStrategy:"uuid",
                     isUnique: true,
-                    default: "uuid_generate_v4()"
+                    default: "uuid_generate_v4()",
+                    isPrimary: true
                 },
                 {
                     name: "filename",
                     type: "varchar",
+                    isNullable: false,
+                },
+                {
+                    name: "product_id",
+                    type: "uuid",
                     isNullable: false,
                 },
                 {
